@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Character Rick and Morty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_last_location">Ultima vez visto:</string>
+    <string name="txt_first_location">Primera vez visto:</string>
+    <string name="txt_specie">Especies</string>
+    <string name="txt_status">Estatus</string>
+    <string name="txt_gender">Genero</string>
+    <string name="txt_alien">Alien</string>
+    <string name="txt_animal">Animal</string>
+    <string name="txt_human">Humano</string>
+    <string name="txt_humanoid">Humanoide</string>
+    <string name="txt_alive">Vivo</string>
+    <string name="txt_dead">Muerto</string>
+    <string name="txt_unknown">Desconocido</string>
+    <string name="txt_female">Hembra</string>
+    <string name="txt_male">Macho</string>
+    <string name="txt_search">Busqueda</string>
+    <string name="app_key">267cbbb0-37a5-4fec-90b0-0c696392594b</string>
 </resources>

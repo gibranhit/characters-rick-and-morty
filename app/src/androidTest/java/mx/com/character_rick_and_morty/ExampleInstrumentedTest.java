@@ -1,4 +1,4 @@
-package mx.com.characterrickandmorty;
+package mx.com.character_rick_and_morty;
 
 import android.content.Context;
 

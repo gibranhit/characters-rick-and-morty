@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_tv">5dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="width_image">150dp</dimen>
+    <dimen name="radius_cv">15dp</dimen>
+    <dimen name="size_progress">100dp</dimen>
+
+</resources>

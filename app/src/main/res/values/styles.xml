@@ -1,10 +1,19 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="BaseTextView">
+        <item name="android:padding">@dimen/padding_tv</item>
+        <item name="android:layout_width">@dimen/zero</item>
+    </style>
+
+    <style name="TextBold" parent="BaseTextView">
+       <item name="android:textStyle">bold</item>
     </style>
 
 </resources>
