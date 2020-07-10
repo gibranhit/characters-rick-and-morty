@@ -1,4 +1,4 @@
-package mx.com.character_rick_and_morty.ui.Characters.adapter;
+package mx.com.character_rick_and_morty.ui.characters.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mx.com.character_rick_and_morty.R;
+import mx.com.character_rick_and_morty.dependecies.db.model.Character;
 import mx.com.character_rick_and_morty.dependecies.rest.response.model.Result;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
@@ -24,9 +25,25 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     private List<Result> results;
     private Context context;
 
-    public CharacterAdapter(List<Result> results, Context context) {
-        this.results = results;
+    private List<Character> characters;
+    private int type;
+    public static final int HISTORY_TYPE = 0;
+    public static final int CHARACTER_TYPE = 1;
+
+    public CharacterAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setResults(List<Result> results) {
+        this.results = results;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     @NonNull
@@ -38,9 +55,16 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
+        if (type == HISTORY_TYPE)
+            setDataHistory(holder, position);
+        else
+            setDataCharacter(holder,position);
+    }
+
+    private void setDataCharacter(CharacterViewHolder holder, int position) {
         Result result = results.get(position);
         holder.tvName.setText(result.getName());
-        Glide.with(context).load(result.getImage()).centerCrop().into(holder.ivImageCharacter);
+        Glide.with(context).load(result.getImage()).centerCrop().error(R.drawable.ic_no_disponible).into(holder.ivImageCharacter);
         int icon = getStatus(result.getStatus());
         holder.tvStatusSpecie.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
         String statusAndSpecie = result.getStatus() + " - " + result.getSpecies();
@@ -49,9 +73,21 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         holder.tvLastLocation.setText(result.getLocation().getName());
     }
 
+    private void setDataHistory(CharacterViewHolder holder, int position) {
+        Character result = characters.get(position);
+        holder.tvName.setText(result.getName());
+        Glide.with(context).load(result.getImage()).centerCrop().error(R.drawable.ic_no_disponible).into(holder.ivImageCharacter);
+        int icon = getStatus(result.getStatus());
+        holder.tvStatusSpecie.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+        String statusAndSpecie = result.getStatus() + " - " + result.getSpecies();
+        holder.tvStatusSpecie.setText(statusAndSpecie);
+        holder.tvFirstLocation.setText(result.getOrigin());
+        holder.tvLastLocation.setText(result.getLocation());
+    }
+
     @Override
     public int getItemCount() {
-        return results.size();
+        return  type == HISTORY_TYPE ? characters.size() : results.size();
     }
 
     private int getStatus(String status){

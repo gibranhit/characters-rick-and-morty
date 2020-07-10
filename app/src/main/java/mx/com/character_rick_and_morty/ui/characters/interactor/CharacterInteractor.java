@@ -1,9 +1,9 @@
-package mx.com.character_rick_and_morty.ui.Characters.interactor;
+package mx.com.character_rick_and_morty.ui.characters.interactor;
 
 import mx.com.character_rick_and_morty.dependecies.rest.callback.ResponseCallBack;
 import mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiEndPoints;
 import mx.com.character_rick_and_morty.dependecies.rest.response.CharacterResponse;
-import mx.com.character_rick_and_morty.ui.Characters.view.CharacterContract;
+import mx.com.character_rick_and_morty.ui.characters.view.CharacterContract;
 
 public class CharacterInteractor implements CharacterContract.Interactor {
 

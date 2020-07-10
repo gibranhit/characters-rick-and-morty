@@ -1,4 +1,4 @@
-package mx.com.character_rick_and_morty.ui.Characters.view;
+package mx.com.character_rick_and_morty.ui.characters.view;
 
 import mx.com.character_rick_and_morty.dependecies.rest.callback.ResponseCallBack;
 import mx.com.character_rick_and_morty.dependecies.rest.response.CharacterResponse;

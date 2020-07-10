@@ -18,4 +18,8 @@
     <string name="txt_male">Macho</string>
     <string name="txt_search">Busqueda</string>
     <string name="app_key">267cbbb0-37a5-4fec-90b0-0c696392594b</string>
+    <string name="txt_character">Personajes</string>
+    <string name="txt_history">Historial</string>
+    <string name="txt_not_data">no se encontraron personajes</string>
+    <string name="insert_character_name">Ingresa el nombre del personaje que deseas buscar</string>
 </resources>

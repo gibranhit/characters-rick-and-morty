@@ -39,7 +39,9 @@ public abstract class BaseFragment extends Fragment {
     /**
      * init specific configuration about the view.
      */
-    protected abstract void initUI();
+    protected void initUI(){
+        //Default implementation to avoid mandatory
+    }
 
     /**
      * Specify the layout of the fragment to be inflated in the {@link BaseFragment#onCreateView(LayoutInflater, ViewGroup, Bundle)}

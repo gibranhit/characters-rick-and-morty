@@ -1,4 +1,4 @@
-package mx.com.character_rick_and_morty.ui.Characters.presenter;
+package mx.com.character_rick_and_morty.ui.characters.presenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,8 +7,8 @@ import org.mockito.MockitoAnnotations;
 
 import mx.com.character_rick_and_morty.dependecies.rest.callback.ResponseCallBack;
 import mx.com.character_rick_and_morty.dependecies.rest.response.CharacterResponse;
-import mx.com.character_rick_and_morty.ui.Characters.interactor.CharacterInteractor;
-import mx.com.character_rick_and_morty.ui.Characters.view.CharacterContract;
+import mx.com.character_rick_and_morty.ui.characters.interactor.CharacterInteractor;
+import mx.com.character_rick_and_morty.ui.characters.view.CharacterContract;
 
 import static mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiConstants.BASE_URL;
 import static mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiConstants.CHARACTER;

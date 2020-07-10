@@ -1,11 +1,11 @@
-package mx.com.character_rick_and_morty.ui.Characters.di;
+package mx.com.character_rick_and_morty.ui.characters.di;
 
 import dagger.Module;
 import dagger.Provides;
 import mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiEndPoints;
-import mx.com.character_rick_and_morty.ui.Characters.interactor.CharacterInteractor;
-import mx.com.character_rick_and_morty.ui.Characters.presenter.CharacterPresenter;
-import mx.com.character_rick_and_morty.ui.Characters.view.CharacterContract;
+import mx.com.character_rick_and_morty.ui.characters.interactor.CharacterInteractor;
+import mx.com.character_rick_and_morty.ui.characters.presenter.CharacterPresenter;
+import mx.com.character_rick_and_morty.ui.characters.view.CharacterContract;
 
 @Module
 public class CharacterModule {

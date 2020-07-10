@@ -1,6 +1,7 @@
-package mx.com.character_rick_and_morty.ui.Characters.view;
+package mx.com.character_rick_and_morty.ui.characters.ft;
 
-import android.app.Dialog;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,30 +11,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 import mx.com.character_rick_and_morty.R;
-import mx.com.character_rick_and_morty.base.BaseFragment;
-import mx.com.character_rick_and_morty.dependecies.di.AppComponent;
+import mx.com.character_rick_and_morty.dependecies.db.model.Character;
 import mx.com.character_rick_and_morty.dependecies.rest.response.CharacterResponse;
 import mx.com.character_rick_and_morty.dependecies.rest.response.model.Info;
 import mx.com.character_rick_and_morty.dependecies.rest.response.model.Result;
-import mx.com.character_rick_and_morty.ui.Characters.adapter.CharacterAdapter;
-import mx.com.character_rick_and_morty.ui.Characters.di.CharacterModule;
-import mx.com.character_rick_and_morty.ui.Characters.di.DaggerCharacterComponent;
+import mx.com.character_rick_and_morty.ui.characters.adapter.CharacterAdapter;
+import mx.com.character_rick_and_morty.ui.characters.base.CharacterBaseFragment;
 
 import static mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiConstants.BASE_URL;
 import static mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiConstants.CHARACTER;
-import static mx.com.character_rick_and_morty.utils.AndroidUtils.configProgressBar;
+import static mx.com.character_rick_and_morty.ui.characters.adapter.CharacterAdapter.CHARACTER_TYPE;
 
-public class CharacterFragment extends BaseFragment implements CharacterContract.View {
-
-    @Inject
-    CharacterContract.Presenter presenter;
+public class CharacterFragment extends CharacterBaseFragment {
 
     @BindView(R.id.rv_characters)
     protected RecyclerView rvCharacters;
@@ -53,30 +49,28 @@ public class CharacterFragment extends BaseFragment implements CharacterContract
     @BindView(R.id.btn_forward)
     protected TextView btnForward;
 
-    private Info info;
+    @BindView(R.id.et_search_character)
+    protected EditText etSearchCharacter;
 
-    private Dialog dialog;
+    private Info info;
 
     @Override
     protected int getFragmentLayout() {
         return R.layout.fragment_character;
     }
 
-    @Override
-    protected void initUI() {
-        setUpProgressBar();
-        presenter.getCharacterRickAndMorty(BASE_URL + CHARACTER);
-    }
-
-    private void setUpProgressBar() {
-        if (dialog == null)
-            dialog = configProgressBar(activity);
-    }
-
-    @OnClick(R.id.btn_search_character)
-    protected void searchCharacter() {
-        String query = getTag(chipGroupSpecie) +"&"+ getTag(chipGroupStatus) +"&"+ getTag(chipGroupGender);
-        presenter.getCharacterRickAndMorty(BASE_URL + CHARACTER + query);
+    @OnEditorAction(R.id.et_search_character)
+    protected boolean searchCharacter(int action) {
+        if (!etSearchCharacter.getText().toString().isEmpty()){
+            if (action == EditorInfo.IME_ACTION_SEARCH){
+                String query = "&" + getTag(chipGroupSpecie) +"&"+ getTag(chipGroupStatus) +"&"+ getTag(chipGroupGender);
+                String character = "name="+ etSearchCharacter.getText().toString();
+                getPresenter().getCharacterRickAndMorty(BASE_URL + CHARACTER + character+query);
+            }
+        } else {
+                Toast.makeText(activity, getString(R.string.insert_character_name), Toast.LENGTH_SHORT).show();
+            }
+        return true;
     }
 
     private String getTag(ChipGroup chipGroup) {
@@ -88,14 +82,6 @@ public class CharacterFragment extends BaseFragment implements CharacterContract
             }
         }
         return tag;
-    }
-
-    @Override
-    protected void setUpComponent(AppComponent appComponent) {
-        DaggerCharacterComponent.builder()
-                .appComponent(appComponent)
-                .characterModule(new CharacterModule(this))
-                .build().inject(this);
     }
 
     @Override
@@ -111,30 +97,32 @@ public class CharacterFragment extends BaseFragment implements CharacterContract
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showDialog() {
-        dialog.show();
-    }
-
-    @Override
-    public void hideDialog() {
-        dialog.dismiss();
-    }
-
     private void setUpListCharacter(List<Result> results){
-        CharacterAdapter adapter = new CharacterAdapter(results, activity);
+        List<Character> characters = getListCharacter(results);
+        getCharacterDao().insertAll(characters);
+        CharacterAdapter adapter = new CharacterAdapter(activity);
+        adapter.setResults(results);
+        adapter.setType(CHARACTER_TYPE);
         rvCharacters.setAdapter(adapter);
         rvCharacters.setLayoutManager(new LinearLayoutManager(activity));
         rvCharacters.setHasFixedSize(true);
     }
 
+    private List<Character> getListCharacter(List<Result> results){
+        List<Character> characters = new ArrayList<>();
+        for (Result result : results){
+            characters.add(Character.parseCharacter(result));
+        }
+        return characters;
+    }
+
     @OnClick(R.id.btn_back)
     protected void previousPage(){
-        presenter.getCharacterRickAndMorty(info.getPrev());
+        getPresenter().getCharacterRickAndMorty(info.getPrev());
     }
 
     @OnClick(R.id.btn_forward)
     protected void nextPage(){
-        presenter.getCharacterRickAndMorty(info.getNext());
+        getPresenter().getCharacterRickAndMorty(info.getNext());
     }
 }

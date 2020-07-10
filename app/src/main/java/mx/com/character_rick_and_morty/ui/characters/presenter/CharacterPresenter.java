@@ -1,8 +1,8 @@
-package mx.com.character_rick_and_morty.ui.Characters.presenter;
+package mx.com.character_rick_and_morty.ui.characters.presenter;
 
 import mx.com.character_rick_and_morty.dependecies.rest.callback.ResponseCallBack;
 import mx.com.character_rick_and_morty.dependecies.rest.response.CharacterResponse;
-import mx.com.character_rick_and_morty.ui.Characters.view.CharacterContract;
+import mx.com.character_rick_and_morty.ui.characters.view.CharacterContract;
 
 public class CharacterPresenter implements CharacterContract.Presenter {
 

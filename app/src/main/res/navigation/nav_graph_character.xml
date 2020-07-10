@@ -7,10 +7,14 @@
 
     <fragment
         android:id="@+id/id_character_ft"
-        android:name="mx.com.character_rick_and_morty.ui.Characters.view.CharacterFragment"
+        android:name="mx.com.character_rick_and_morty.ui.characters.ft.CharacterFragment"
         android:label="fragment_character"
-        tools:layout="@layout/fragment_character">
+        tools:layout="@layout/fragment_character"/>
 
-    </fragment>
+    <fragment
+        android:id="@+id/id_history_ft"
+        android:name="mx.com.character_rick_and_morty.ui.characters.ft.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search"/>
 
 </navigation>

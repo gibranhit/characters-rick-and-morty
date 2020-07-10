@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Characters.view.CharacterFragment">
+    tools:context=".ui.characters.ft.CharacterFragment">
 
    <TextView
        android:id="@+id/tv_specie"
@@ -121,39 +121,57 @@
 
    </com.google.android.material.chip.ChipGroup>
 
-   <androidx.appcompat.widget.AppCompatButton
-       android:id="@+id/btn_search_character"
+   <EditText
+       android:id="@+id/et_search_character"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:text="@string/txt_search"
-       android:textAllCaps="false"
-       app:layout_constraintTop_toBottomOf="@id/chip_group_gender" />
+       android:hint="@string/txt_search"
+       app:layout_constraintTop_toBottomOf="@id/chip_group_gender"
+       android:inputType="text"
+       android:maxLines="1"
+       android:imeOptions="actionSearch"/>
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/rv_characters"
+   <ScrollView
+       android:id="@+id/scrollView"
        android:layout_width="match_parent"
-       android:layout_height="@dimen/zero"
-       android:padding="10dp"
-       app:layout_constraintTop_toBottomOf="@id/btn_search_character"
-       app:layout_constraintBottom_toTopOf="@id/btn_forward"/>
+       android:layout_height="0dp"
+       android:fillViewport="true"
+       app:layout_constraintTop_toBottomOf="@id/et_search_character"
+       app:layout_constraintBottom_toBottomOf="parent">
 
-   <TextView
-       android:id="@+id/btn_back"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:background="@drawable/selector_arrow_back"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toBottomOf="parent"
-       android:enabled="false"/>
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/cl_container">
 
-   <TextView
-       android:id="@+id/btn_forward"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:background="@drawable/selector_arrow_forward"
-       app:layout_constraintBottom_toBottomOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       android:enabled="false"/>
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/rv_characters"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/zero"
+             android:padding="10dp"
+             app:layout_constraintTop_toBottomOf="@id/btn_back"
+             app:layout_constraintBottom_toBottomOf="parent"/>
 
+         <TextView
+             android:id="@+id/btn_back"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/selector_arrow_back"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             android:enabled="false"/>
+
+         <TextView
+             android:id="@+id/btn_forward"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="@drawable/selector_arrow_forward"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             android:enabled="false"/>
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+   </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

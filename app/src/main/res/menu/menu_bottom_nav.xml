@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/id_character_ft"
+        android:icon="@drawable/ic_baseline_account_box_24"
+        android:title="@string/txt_character"
+        />
+    <item
+        android:id="@+id/id_history_ft"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/txt_history" />
+</menu>

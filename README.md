@@ -13,17 +13,18 @@ git clone https://github.com/gibranhit/characters-rick-and-morty.git
 ```
 It's recommend to have the latest version of android studio **3.6**
 
-
-
 ## Build with
 
 * [Java](#) - Main programming language
 * [MVP](#) - Architectural pattern used
 * [Dagger 2](#) - Framework for Dependency Injection
 * [Retrofit](#) - To make network requests
-* [Rxjava2](#) - To handle async calls
 * [Jetpack](#) - Used in conjunction with MVP
-* [AppCenter](#) - As continuos integration tool.
+* [Room](#) - To store local data
+* [Glide](#) - Image loading framework for Android.
+* [Butterknife](#) - To bind views more easy.
+* [Lombok](#) - To build getter and setter automatically.
+* [Gson](#) - To convert JSON to Java Objects.
 
 ## Author
 

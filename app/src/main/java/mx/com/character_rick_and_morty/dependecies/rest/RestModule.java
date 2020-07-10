@@ -3,6 +3,8 @@ package mx.com.character_rick_and_morty.dependecies.rest;
 
 import android.content.Context;
 
+import androidx.room.Room;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -12,11 +14,15 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import mx.com.character_rick_and_morty.dependecies.db.CharacterDB;
+import mx.com.character_rick_and_morty.dependecies.db.dao.CharacterDao;
 import mx.com.character_rick_and_morty.dependecies.rest.endpoints.ApiEndPoints;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static mx.com.character_rick_and_morty.dependecies.db.CharacterDB.DATABASE_NAME;
 
 
 @Module
@@ -66,5 +72,20 @@ public class RestModule {
     @Singleton
     public ApiEndPoints provideApiEndPoints(Retrofit retrofit) {
         return retrofit.create(ApiEndPoints.class);
+    }
+
+    @Provides
+    @Singleton
+    protected CharacterDB provideDataBase(Context context) {
+        return Room.databaseBuilder(context, CharacterDB.class, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    public CharacterDao providesCharacterDao(CharacterDB dataBase) {
+        return dataBase.getCharacterDao();
     }
 }
